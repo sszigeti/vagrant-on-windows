@@ -51,8 +51,11 @@ service nginx restart > /dev/null
 echo "Installing Composer globally"
 curl -sS https://getcomposer.org/installer | php > /dev/null
 mv composer.phar /usr/local/bin/composer
-echo "
-PATH=\$PATH:~/.composer/vendor/bin" >> /home/vagrant/.bashrc
+#echo "
+#PATH=\$PATH:~/.composer/vendor/bin" >> /home/vagrant/.bashrc
+
+echo "Add Composer to PATH, also set up a nice bash prompt"
+su -c 'ln -s /var/www/provision/.bash_aliases /home/vagrant/.bash_aliases' - vagrant
 
 echo "Installing PHP Code Sniffer globally"
 su -c '/usr/local/bin/composer global require "squizlabs/php_codesniffer=*" > /dev/null' - vagrant
